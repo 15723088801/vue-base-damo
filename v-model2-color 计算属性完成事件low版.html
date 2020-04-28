@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="item in list.filter((item)=>{
+                if(state==='all'){
+                    return true
+                }else if(state==='completed'){
+                    return item.flag
+                }else{
+                    return  !item.flag
+                }
+
+
+
+                })">
+                <input type="checkbox" v-model="item.flag">{{item.text}}
+            </li>
+        </ul>
+<button @click="state='all'">全部</button>
+<button @click="state='completed'">完成任务的</button>
+<button @click="state='uncompleted'">未完成任务的</button>
+<!-- 标志三种状态  completed uncompleted all  -->
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el: "#box",
+            data: {
+                state:'all',
+                list: [
+                    {
+                        flag: true,
+                        text: "aa"
+                    }, {
+                        flag: true,
+                        text: "bb"
+                    }, {
+                        flag: true,
+                        text: "cc"
+                    }, {
+                        flag: true,
+                        text: "dd"
+                    },
+                ]
+            },
+          
+
+
+        })
+
+    </script>
+</body>
+
+</html>

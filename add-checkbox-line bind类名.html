@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .line {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="item in list">
+                <input type="checkbox" v-model="item.flag">
+                <!-- <span :class="{'line':item.flag}"> {{item.text}}</span>  两种添加类名的方法-->
+                <span :class="[item.flag?'line':'']"> {{item.text}}</span>
+            </li>
+
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                list: [{
+                        flag: false,
+                        text: 'aa'
+                    },
+                    {
+                        flag: true,
+                        text: 'aa'
+                    },
+                    {
+                        flag: false,
+                        text: 'aa'
+                    }
+                ]
+            },
+
+
+
+        })
+    </script>
+</body>
+
+</html>

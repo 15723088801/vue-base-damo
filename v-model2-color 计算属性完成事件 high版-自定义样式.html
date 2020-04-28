@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        ul,li{list-style: none;padding: 0;margin: 0;}
+        input[type=checkbox]{
+            display: none;
+        }
+        .xuanzhong+label {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #000;
+            line-height: 20px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 50%;
+        }
+
+        .xuanzhong:checked+label::after{
+            content: '\2713';
+        }
+
+        .box>label{
+            display: inline-block;
+            transform: rotate(90deg) scale(1,2); 
+            color: #999;
+        }
+
+
+        .box .select{
+         color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box">
+        <!-- <input type="checkbox" v-model="select"> -->
+        <input type="checkbox" v-model="select" id="select3">
+        <label  @click="select" for="select3" :class="{'select':select}">></label>
+
+
+        <ul>
+            <li v-for="(item,index) in filterList">
+                <input type="checkbox" v-model="item.flag" :id="'xz'+index" class="xuanzhong">
+                <label :for="'xz'+index"></label>
+                {{item.text}}
+                <!--label  标签  for属性  是自带的 绑定所要绑定的   for 后面的值是id名！-->
+                <!-- input中的   :id="'xz'+index"   是为了给label 绑定！  所以还需要另外取lass名字-->
+            </li>
+        </ul>
+        <button @click="state='all'">全部</button>
+        <button @click="state='completed'">完成任务的</button>
+        <button @click="state='uncompleted'">未完成任务的</button>
+        <p>已经完成{{selectCount}}项</p>
+        <!-- 标志三种状态  completed uncompleted all  -->
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                state: 'all',
+                list: [
+                    {
+                        flag: true,
+                        text: "aa"
+                    }, {
+                        flag: true,
+                        text: "bb"
+                    }, {
+                        flag: true,
+                        text: "cc"
+                    }, {
+                        flag: true,
+                        text: "dd"
+                    },
+                ]
+            },
+            computed: {
+                filterList() {
+                    return this.list.filter((item) => {
+                        if (this.state === 'all') {
+                            return true
+                        } else if (this.state === 'completed') {
+                            return item.flag
+                        } else {
+                            return !item.flag
+                        }
+
+
+
+                    })
+                },
+                selectCount() {
+                    return this.list.filter((item) => {
+                        return item.flag
+                    }).length
+                },
+                select: {
+                    get() {
+                        return this.list.every((item) => item.flag) //有一个没选中  就不选
+                    },
+                    set(v) {
+                        this.list.forEach((item) => item.flag = v);//全选/全不选
+                        // v就是勾选那个单选框的时候 会自动传true或者false，这里把勾选时候的v循环赋值给了每一个 item.flag 再返回
+                    }
+                }
+            }
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

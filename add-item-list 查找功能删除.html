@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        #box span {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" v-model="str" @keyup.enter="add">
+        <button @click="add">添加</button>
+        <button @click="search">查找</button>
+        <ul>
+            <li v-for="item in list" v-show="item.flag">
+                <input type="checkbox" v-model="item.flag"> {{item.text}}
+                <button  @click="del">删除</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                str: '',
+                list: [{
+                    flag: true,
+                    text: 'aa'
+                }]
+            },
+            methods: {
+                add() {
+                    this.list.push({
+                        flag: true,
+                        text: this.str
+                    })
+                    this.str = ''
+
+                },
+                search() {
+                    this.list.filter((item) => {
+                        // 模糊查找
+                        // 精确查找if(item.text==this.str)
+
+                        // if (item.text.indexOf(this.str) !== -1) { //不等于-1  代表里边  包含查找的关键字
+                        //     item.flag = true
+                        // } else {
+                        //     item.flag = false
+
+                        // }
+                        if (item.text.includes(this.str)) { //不等于-1  代表里边  包含查找的关键字
+                            item.flag = true
+                        } else {
+                            item.flag = false
+
+                        }
+                        // includes es6字符串新增的方法   包含的话 返回true
+                    })
+
+                },
+                del(index){
+                    this.list.splice(index,1)
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

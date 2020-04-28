@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        #box span {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" v-model="str" @keyup.enter="add">
+        <button @click="add">添加</button>
+        <ul>
+            <li v-for="item in list">
+                <input type="checkbox" v-model="item.flag" v-show="item.flag" >
+                <p>{{item.text}}</p>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                str: '',
+                list: [{
+                    flag: false,
+                    text: 'aa'
+                }]
+            },
+            methods: {
+                add() {
+                    this.list.push({
+                        flag: false,
+                        text: this.str
+                    })
+                    this.str=''
+
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

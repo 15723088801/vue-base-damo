@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="(item,index) in arr">{{index}}{{item.text}}
+                <ul>
+                    <li v-for="(x,index2) in item.lessns">{{index2}}{{x.text}}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                arr: [{
+                        "text": "jq课程"
+                    },
+                    {
+                        "text": "VUE课程",
+                        "lessns": [{
+                                "text": "jq1课程"
+                            },
+                            {
+                                "text": "jq2课程"
+                            },
+                            {
+
+                                "text": "jq3课程"
+                            },
+                        ]
+                    },
+                    {
+                        "text": "Mongode课程"
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

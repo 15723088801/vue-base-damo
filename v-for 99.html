@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        #box span {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <p v-for="x  in num">
+            <span v-for="item in x">{{x}}*{{item}}={{x*item}}</span>
+
+        </p>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                num: 9
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

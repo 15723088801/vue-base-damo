@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="checkbox" v-model="flag">
+        <p :title="str" v-show="flag">鼠标悬停显示时间 </p>
+        <!-- 频繁显示 用show 比较好！  dom操作少 切换时间短 -->
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                str:new Date().toLocaleString(),
+                flag:true
+            }
+        })
+    </script>
+</body>
+
+</html>

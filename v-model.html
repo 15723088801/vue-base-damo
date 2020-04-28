@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+   <div id="box">
+     <input type="text" v-model="msg" maxlength="20">还可以输入{{20-msg.length}}个字
+   </div>
+
+   <script>
+       new Vue({
+           el:"#box",
+           data:{
+               msg:"hello world"
+           }
+       })
+
+   </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        #box span {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="(item,index) in list">
+                <h3 @click="toggle(index)">{{item.title}}</h3>
+                <ul v-show="item.flag">
+                    <li v-for="subitem in item.content">{{subitem}}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                list: [
+                    {
+                        "title": "图片",
+                        "content": ["我的图片", "公用图片"],
+                        "flag": true
+                    },
+                    {
+                        "title": "视频",
+                        "content": ["我的视频", "公用视频"],
+                        "flag": true
+                    }
+                ]
+            },
+            methods:{
+                toggle(index){
+                    this.list[index].flag=!this.list[index].flag
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

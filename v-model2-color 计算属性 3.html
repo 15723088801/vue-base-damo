@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .color{
+            width: 100px;height: 100px;
+        }
+    </style>
+</head>
+<body>
+   <div id="box">
+       <input type="text" v-model="str">{{info}}
+   
+
+   </div>
+
+   <script>
+       new Vue({
+           el:"#box",
+           data:{
+            str:''
+           },
+           computed:{
+            info(){
+                   if(this.str.length<5&&this.str.length>0){
+                       return "用户名长度不能小于5"
+                   }
+               }
+           }
+       })
+
+   </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+   <div id="box">
+      <com></com>
+      <com2></com2>
+   </div>
+  
+
+   <script>
+    //    全局组件
+    Vue.component("com",{
+        template:' <div>我的第一个组件</div>'
+    })
+// 局部组件
+var com2={
+    template:' <div>局部的组件{{msg}}</div>',
+    data(){
+        return {
+            msg:'dasdadasdads'
+        }
+    }
+}
+
+    new Vue({
+        el:"#box",
+        components:{
+            com2
+        }
+    })
+
+   </script>
+</body>
+</html>

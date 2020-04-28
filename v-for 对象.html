@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="box">
+       <p v-for="(item,key) in obj">{{item}}+{{key}}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#box",
+            data: {
+                obj:{
+                    "id":1,
+                    "xx":'dasd',
+                    "dd":17
+                }
+            }
+               
+        })
+    </script>
+</body>
+
+</html>

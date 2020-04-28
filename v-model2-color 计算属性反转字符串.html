@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+   <div id="box">
+       <input type="text" v-model="str" >{{info}}
+   
+
+   </div>
+
+   <script>
+       new Vue({
+           el:"#box",
+           data:{
+            str:'',
+            // info:''
+           },
+        //    methods:{
+        //     reverse(){
+        //           this.info=this.str.split("").reverse().join("")
+        //        }
+        //    }
+        computed:{
+            info(){
+                return this.str.split("").reverse().join("")
+            }
+        }
+       })
+
+   </script>
+</body>
+</html>

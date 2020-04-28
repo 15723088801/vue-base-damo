@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <count :n="2"></count>
+        <!-- v-bind 绑定 可以传任何类型  如果需要传字符串  在里边加单引号'' -->
+        <count :n="4"></count>
+        <count :n="5"></count>
+        <count :n="9"></count>
+        <count :n="1"></count>
+    </div>
+
+
+    <script>
+
+        var count = {
+            props:{
+                n:Number
+                // props 语法2 控制  传值的类型，数据单向的  父组件传给子组件的值 不能改
+            },
+            // props语法1
+            template: `<div>{{w}}<button @click='inc'>加1</button></div>`,
+            data() {
+                return {
+                   w: this.n
+                }
+            },
+            methods: {
+                inc() {
+                    this.w++
+                }
+            }
+        }
+
+        new Vue({
+            el: "#box",
+            components: {
+                count
+            }
+        })
+
+    </script>
+</body>
+
+</html>
