@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="box">
+    </div>
+
+    <!-- 狗子函数  是自动调用的 -->
+
+
+    <script>
+
+
+
+
+        new Vue({
+            el: "#box",
+            data: {
+                a: "aaa"
+            },
+
+            beforeCreate() {
+                console.log( this.a)
+            },
+            created() {
+                console.log( this.a)
+                this.a="aaaaaa"
+
+            },
+            beforeMount() {
+                console.log("beforeMount")
+
+            },
+            mounted() {
+                console.log("mounted")
+            },
+            beforeUpdate(){
+                // 监控页面所有数据的变化
+            },
+            updated() {
+                console.log("updated")
+
+            }
+
+
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

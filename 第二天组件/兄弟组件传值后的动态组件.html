@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <!-- <com1></com1>
+        <com2></com2> -->
+        <keep-alive>
+            <component :is="comName"></component>
+        </keep-alive>
+        <!--  <keep-alive>  把动态组件包裹起来  可以保存缓存的 数据  input框中 。
+             :is="comName"   comName是根实例Vue中的 data中的 变量属性名-->
+
+        <button @click="comName='com1'">1</button>
+        <button @click="comName='com2'">2</button>
+
+    </div>
+
+
+    <script>
+
+        var com1 = {
+            template: `<div>com1<input type="text"></div>`,
+        }
+        var com2 = {
+            template: `<div>com2</div>`,
+        }
+
+        new Vue({
+            el: "#box",
+            components: {
+                com1, com2
+            },
+            data: {
+                comName: 'com1'
+            }
+        })
+
+    </script>
+</body>
+
+</html>

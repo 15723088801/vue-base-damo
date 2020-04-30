@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" id="wbk" ref="wbk">
+        <!--ref 是固定的语法****  -->
+    </div>
+
+
+    <script>
+
+
+
+
+        new Vue({
+            el: "#box",
+            data: {
+                a: "aaa"
+            },
+
+            beforeCreate() {
+                console.log( this.a)
+            },
+            created() {
+                console.log( this.a)
+                this.a="aaaaaa"
+
+            },
+            beforeMount() {
+                console.log("beforeMount")
+
+            },
+            mounted() {
+                console.log("mounted")
+                this.$refs.wbk.focus()
+                // this.$refs  是固定的语法
+                // ************找节点  并且调用focus() 方法
+                // 下面是 low的方法  
+                // document.getElementById("wbk").focus()
+            },
+            updated() {
+                console.log("updated")
+
+            }
+
+
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

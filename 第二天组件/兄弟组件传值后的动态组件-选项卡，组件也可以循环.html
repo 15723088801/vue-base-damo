@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <show-menu v-for="(item,index) in list" :menuitem="list[index]" :key="index"></show-menu>
+        <!-- 组件也可以循环 -->
+
+    </div>
+
+
+    <script>
+
+        var showMenu = {
+            props: ["menuitem"],
+            template: `<div>
+                <h3 @click="toggle">{{menuitem.title}}</h3>
+                        <ul v-show="menuitem.flag">
+                            <li v-for="item in menuitem.listt" >{{item}}</li>
+                        </ul>
+                     </div>`,
+            methods: {
+                toggle() {
+                    this.menuitem.flag = !this.menuitem.flag
+                }
+            }
+        }
+
+
+        new Vue({
+            el: "#box",
+            components: {
+                showMenu
+            },
+
+            data: {
+                list: [
+                    {
+                        "title": "视频",
+                        flag: true,
+                        "listt": ["我的视频", "公用视屏"]
+                    },
+                    {
+                        "title": "图片",
+                        flag: true,
+                        "listt": ["我的图片", "公用图片"]
+                    }
+                ]
+            }
+
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

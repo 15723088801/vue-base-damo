@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <com>
+            <template slot="left" slot-scope="vaaa">
+                <span >返回{{vaaa.a}}</span><a href="#">return</a>
+            </template>
+
+            <span slot="right">查找</span>
+        </com>
+
+        <!-- 组件中间写 内容  是插槽的位置 -->
+    </div>
+
+
+    <script>
+
+        var com = {
+            template: `<div>  <slot name="left" :a="22222"></slot> 标题 <slot name="right"></slot></div>`,
+        }
+
+        new Vue({
+            el: "#box",
+            components: {
+                com
+            },
+
+        })
+
+    </script>
+</body>
+
+</html>

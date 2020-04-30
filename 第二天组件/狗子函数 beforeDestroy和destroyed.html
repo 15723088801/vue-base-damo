@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" v-model="a">
+        <!-- 这里的a 是绑定的根实例中的 data中的 a  如果实例被销毁  就会失去输入框的 双向绑定更新功能。可看出实例是否被销毁 -->
+        <button @click="kill">销毁</button>
+        {{a}}
+        <!-- 
+            beforeDestroy实例销毁前，自动调用
+            destroyed实例销毁后，自动调用
+            组件里的data  数据  方法  这些东西 组件销毁了 自动就没有了，
+            但是一些不是组件里的资源 比如定时器，数据库连接！并不是组件销毁了  
+            就销毁掉，她还在内存中占资源。会引起内存泄漏。容量 占满了 溢出
+
+js构造函数 自动调用  js自动清理  简单
+c++ 手动清理内存  所以最难
+这两个狗子函数使用场合：组件都销毁了  怎么越用越卡。考虑 是否有些资源 没清理
+提高性能。
+destroyed 不常用
+         -->
+    </div>
+
+
+    <script>
+
+
+
+
+        new Vue({
+            el: "#box",
+            data: {
+                a: "aaa"
+            },
+
+            beforeCreate() {
+                console.log(this.a)
+            },
+            created() {
+                console.log(this.a)
+                this.a = "aaaaaa"
+
+            },
+            beforeMount() {
+                console.log("beforeMount")
+
+            },
+            mounted() {
+                console.log("mounted")
+                this.a = 'bbbbb'
+                this.timer = setInterval(() => {
+                    console.log("timer")
+                }, 10)
+            },
+            beforeUpdate() {
+                console.log("beforeUpdate")
+            },
+            updated() {
+                console.log("updated")
+            },
+            beforeDestroy() {
+                clearInterval(this.timer)
+                console.log("beforeDestroy并清除定时器")
+
+            },
+            destroyed() {
+                console.log("destroyed")
+            },
+            methods: {
+                kill() {
+                    this.$destroy()
+                }
+            }
+
+
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

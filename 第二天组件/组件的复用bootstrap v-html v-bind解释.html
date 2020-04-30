@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .progress {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <count :v='25' name='one' @child=receive></count>
+        <count :v='50' name='two' @child=receive></count>
+        <count :v='70' name='three' @child=receive></count>
+        <count :v='40' name='four' @child=receive></count>
+        {{info}}
+        <p v-bind:a="xxx">{{a}}</p>
+        <!-- v-bind 绑定a属性 值是xxx   a属性把值xxx传给这个指令去工作。这个指令根据a属性来工作 -->
+        <p v-html="a">{{a}}</p>
+        
+        <!-- 事件写在模板里 -->
+    </div>
+
+
+    <script>
+
+        var count = {
+            props: {
+                v: Number,
+                name:String
+                // 这里规定类型 一定牢记
+            },
+            data() {
+                return {
+                    n: this.v
+
+                }
+            },
+            template: `<div class="progress">
+                                <div class="progress-bar"  :style="{width: n+'%'}">{{n}}% </div>
+                     </div>`,
+            //  这个绑定样式的语法 差点没看懂  bind绑定一个对象  :style="{width: n+'%'}"
+
+            methods: {
+                inc() {
+                    this.n++
+                }
+            },
+            created() { 
+                var timer = setInterval(() => {
+                    // if (this.n<100) {
+                    //     this.n++
+                    // } else {
+                    //     clearInterval(timer)
+                    // }
+                    // 写法1
+                    // 写法2
+                    // this.n++;
+                    // this.n==100&&clearInterval(timer)
+
+                    // 子组件传父组件
+                    if (this.n < 100) {
+                        this.n++
+                    } else {
+                        clearInterval(timer)
+                        this.$emit("child", this.name)
+                    }
+                }, 10)
+            }
+        }
+
+        new Vue({
+            el: "#box",
+            components: {
+                count
+            },
+            data: {
+                info: '',
+                a:'<h1>aaaaaaaaaaaaaawwwwwwwwwwwww</h1>'
+            },
+            methods: {
+            
+                receive(n) {
+                    this.info = n + "已经完成"
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .box div {
+            /*组件start 就是这个 div ***** */
+            background: url(img/off.png);
+            width: 56px;
+            height: 59px;
+            float: left;
+        }
+
+        .box .select {
+            background: url(img/on.png);
+        }
+    </style>
+</head>
+<!-- mouseover会冒泡触发它的父元素.(想要阻止mouseover的冒泡事件就用mouseenter) -->
+
+<body>
+    <div id="box" class="box">
+        <start v-for="(n,index) in 5" :key="index" @mouseenter.native="enter(n)" :class="{'select':n<=curIndex}"
+            @mouseleave.native="leave()" @click.native="ok(n)"></start>
+        <!-- **** 组件上 要调用原生事件  要加.native  修饰符 -->
+    </div>
+
+
+    <script>
+
+        var start = {
+            template: `<div>
+
+                     </div>`,
+
+        }
+
+
+        new Vue({
+            el: "#box",
+            data: {
+                curIndex: 0,
+                flag:false
+            },
+            components: {
+                start
+            },
+            methods: {
+                enter(n) {
+                    if (!this.flag) {
+                    this.curIndex = n;
+                        
+                    }
+                },
+                leave() {
+                    if (!this.flag) {
+                    this.curIndex = 0;
+                        
+                    }
+                },
+                ok(n){
+                    this.curIndex=n;
+                    this.flag=true;// 用户是否单击过
+                }
+            }
+
+
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

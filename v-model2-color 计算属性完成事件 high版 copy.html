@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="checkbox" v-model="select">
+        <ul>
+            <li v-for="item in filterList">
+                <input type="checkbox" v-model="item.flag">{{item.text}}
+            </li>
+        </ul>
+        <button @click="state='all'">全部</button>
+        <button @click="state='completed'">完成任务的</button>
+        <button @click="state='uncompleted'">未完成任务的</button>
+        <p>已经完成{{selectCount}}项</p>
+        <!-- 标志三种状态  completed uncompleted all  -->
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                state: 'all',
+                list: [
+                    {
+                        flag: true,
+                        text: "aa"
+                    }, {
+                        flag: true,
+                        text: "bb"
+                    }, {
+                        flag: true,
+                        text: "cc"
+                    }, {
+                        flag: true,
+                        text: "dd"
+                    },
+                ]
+            },
+            computed: {
+                filterList() {
+                    return this.list.filter((item) => {
+                        if (this.state === 'all') {
+                            return true
+                        } else if (this.state === 'completed') {
+                            return item.flag
+                        } else {
+                            return !item.flag
+                        }
+
+
+
+                    })
+                },
+                selectCount() {
+                    return this.list.filter((item) => {
+                        return item.flag
+                    }).length
+                },
+                select: {
+                    get() {
+                        return this.list.every((item) => item.flag) //有一个没选中  就不选
+                    },
+                    set(v) {
+                        this.list.forEach((item) => item.flag=v);//全选/全不选
+                        // v就是勾选那个单选框的时候 会自动传true或者false，这里把勾选时候的v循环赋值给了每一个 item.flag 再返回
+                    }
+                }
+            }
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

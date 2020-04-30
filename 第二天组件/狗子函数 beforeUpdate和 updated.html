@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="box">
+        {{a}}
+        <!-- 在mounted中更新了  根实例中的 a   在这里 view层  差值表达式  {{a}}   这样 两个更新的狗子函数  就执行了！*********** 
+        注意  在在updated狗子函数中 谨慎更新数据 会造成死循环*******
+    
+    在updated中  更新数据 就会死循环！  更新完成后  又更新数据   逻辑上也是 死循环！-->
+    </div>
+
+
+    <script>
+
+
+
+
+        new Vue({
+            el: "#box",
+            data: {
+                a: "aaa"
+            },
+
+            beforeCreate() {
+                console.log( this.a)
+            },
+            created() {
+                console.log( this.a)
+                this.a="aaaaaa"
+
+            },
+            beforeMount() {
+                console.log("beforeMount")
+
+            },
+            mounted() {
+                console.log("mounted")
+                this.a='bbbbb'
+            },
+            beforeUpdate(){
+                console.log("beforeUpdate")
+
+            },
+            updated() {
+                console.log("updated")
+
+            }
+
+
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

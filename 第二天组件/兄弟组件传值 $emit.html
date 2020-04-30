@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <txt @child="recevies"></txt>
+        <list :father="list"></list>
+
+    </div>
+
+    <script>
+
+        var txt = {
+        
+            template: `<input type="text" v-model="str" @keyup.enter="subDiy">`,
+            data() {
+                return {
+                    str: ''
+                }
+            },
+            methods:{
+                subDiy(){
+                    this.$emit("child",this.str);
+                    this.str=""
+                }
+            }
+        }
+
+        var list = {
+
+            props: ["father"],
+            template: `<ul>
+                             <li v-for="item in father">{{item}}</li>
+                 </ul>`,
+
+        }
+
+        new Vue({
+            el: "#box",
+            data: {
+                list: ['aa']
+            },
+            components: {
+                txt, list
+            },
+            methods: {
+                recevies(n) {
+                    this.list.push(n);
+                }
+            }
+        })
+
+        // 思路 先把框架 搭好！  父组件写好  两个子组件写好！ 然后把子组件渲染出来
+
+    </script>
+</body>
+
+</html>

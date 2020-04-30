@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+   
+</head>
+
+<body>
+    <div id="box">
+        <p v-for="item in list">{{item}}</p>
+        <button @click="update">update</button>
+    </div>
+
+
+    <script>
+
+     
+
+
+        new Vue({
+            el: "#box",
+            data: {
+               list:[1,2,3,4,5]
+            },
+           
+            methods: {
+              update(){
+                  this.list[2]=33;
+                //  方法1  this.list.splice(2,1,33)
+                   //  方法2  this.$forceUpdate()
+                //    通过下标去改数据  视图有时候 不会更新 采取这2法
+              }
+            }
+
+
+
+
+
+        })
+
+    </script>
+</body>
+
+</html>

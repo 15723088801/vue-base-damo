@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <com>
+                <button slot="one">是</button>
+                <button slot="two">否</button>
+                <button slot="three">重试</button>
+        </com>
+
+        <!-- 组件中间写 内容  是插槽的位置    写在<com> 中间的！-->
+
+    </div>
+
+
+    <script>
+
+        var com = {
+            template: `<div> <h1>标题</h1> <slot name="one" ></slot><slot name="two" ></slot><slot name="three" ></slot></div>`,
+        }
+
+        new Vue({
+            el: "#box",
+            components: {
+                com
+            },
+
+        })
+
+    </script>
+</body>
+
+</html>

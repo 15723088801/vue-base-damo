@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <txt :fdiy="addItem"></txt>
+        <list :father="list"></list>
+        <!-- v-bind:属性=""  这个属性后面不仅可以传数据还可以传方法！******** -->
+
+    </div>
+
+    <script>
+
+        var txt = {
+            props: ["fdiy"],
+            // 父组件把本身的方法传给子组件 子组件通过v-model绑定参数 接受到父组件的方法 点击回车通过此方法把参数传回给父组件 父组件再把子组件的参数 压入到自身的数组 自身的数组传给另一个子组件的 另一个子组件渲染出来
+            // 注意 v-bind绑定的属性的名字不能写成大写 和驼峰
+            template: `<input type="text" v-model="str" @keyup.enter="fdiy(str)">`,
+            data() {
+                return {
+                    str: ''
+                }
+            }
+        }
+
+        var list = {
+
+            props: ["father"],
+            template: `<ul>
+                             <li v-for="item in father">{{item}}</li>
+                 </ul>`,
+
+        }
+
+        new Vue({
+            el: "#box",
+            data: {
+                list: ['aa']
+            },
+            components: {
+                txt, list
+            },
+            methods: {
+                addItem(str) {
+                    this.list.push(str);
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
